@@ -1,9 +1,9 @@
-use crate::growers::Grower;
-
-pub mod growers;
+// use crate::growers::Grower;
+mod growers;
+// pub mod growers;
 
 fn main() {
-    let plant_killer = <dyn Grower as RaspberryPie>::new(4, 5);
+    let plant_killer = growers::MockedPie::new(4, 5);
 
     println!("Hello, world!");
 }
