@@ -12,13 +12,16 @@ pub struct RaspberryPie {
 
 impl RaspberryPie {
     pub fn new(water_port: u8, light_port: u8) -> RaspberryPie {
-        println!{"made it here"};
-        RaspberryPie {water_port, light_port}
+        println! {"made it here"};
+        RaspberryPie {
+            water_port,
+            light_port,
+        }
     }
 }
 
-impl Grower for RaspberryPie {
-    fn water(&self) {}
+// impl Grower for RaspberryPie {
+//     fn water(&self) {}
 
-    fn light(&self) {}
-}
+//     fn light(&self) {}
+// }
