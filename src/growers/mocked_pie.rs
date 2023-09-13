@@ -1,22 +1,23 @@
-use grower;
+// use grower;
+use crate::growers::Grower;
 
-#[derive(Debug)]
+// #[derive(Debug)]
 pub struct MockedPie {
-    water_port: u8,
-    light_port: u8,
+    pub water_port: u8,
+    pub light_port: u8,
 }
 
-pub impl MockedPie {
-    fn new(water_port: &u8, light_port: &u8) -> RaspberryPie {
-        println! {"made it here in Mocked Pie"};
-        MockedPie {
-            water_port,
-            light_port,
-        }
-    }
-}
+// pub impl MockedPie {
+//     fn new(water_port: &u8, light_port: &u8) -> RaspberryPie {
+//         println! {"made it here in Mocked Pie"};
+//         MockedPie {
+//             water_port,
+//             light_port,
+//         }
+//     }
+// }
 
-pub impl Grower for MockedPie {
+impl Grower for MockedPie {
     fn water(&self) {
         println! {"watering"};
     }
