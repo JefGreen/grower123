@@ -1,4 +1,4 @@
 use crate::plant_types::Plantable;
 
-
-pub 
+// List basic needs
+pub struct Microgreen {}
