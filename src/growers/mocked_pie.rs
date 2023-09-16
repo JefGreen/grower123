@@ -1,6 +1,6 @@
 use crate::growers::Grower;
 
-struct MockedPie {
+pub struct MockedPie {
     water_port: u8,
     light_port: u8,
 }
@@ -17,10 +17,10 @@ impl MockedPie {
 
 impl Grower for MockedPie {
     fn water(&self) {
-        println! {"watering"};
+        println!("watering using port {}", self.water_port);
     }
 
     fn light(&self) {
-        println! {"lighting"};
+        println!("lighting using port {}", self.light_port);
     }
 }

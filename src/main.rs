@@ -2,9 +2,9 @@ use growers::Grower;
 mod growers;
 
 fn main() {
-    let plant_killer = growers::MockedPie::new(4, 5);
+    let grower = growers::MockedPie::new(4, 5);
 
-    plant_killer.water();
+    grower.water();
 
     println!("Hello, world!");
 }
