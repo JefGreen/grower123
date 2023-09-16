@@ -1,8 +1,18 @@
 use crate::growers::Grower;
 
-pub struct MockedPie {
-    pub water_port: u8,
-    pub light_port: u8,
+struct MockedPie {
+    water_port: u8,
+    light_port: u8,
+}
+
+impl MockedPie {
+    pub fn new(water_port: u8, light_port: u8) -> MockedPie {
+        println! {"made it here"};
+        MockedPie {
+            water_port,
+            light_port,
+        }
+    }
 }
 
 impl Grower for MockedPie {
