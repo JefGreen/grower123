@@ -4,6 +4,7 @@ use std::fs::File;
 use std::io::Read;
 use std::io::Write;
 
+// Possibly create a trait called persistable
 fn create_db() {
     let mut data_file = File::create("data.json").expect("creation failed");
 
