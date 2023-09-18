@@ -11,11 +11,11 @@ fn create_db() {
     data_file.write("{}".as_bytes()).expect("write failed");
 }
 
-fn remove_db() {
-    fs::remove_file("data.json").expect("could not remove file");
+// fn remove_db() {
+//     fs::remove_file("data.json").expect("could not remove file");
 
-    println!("Removed file data.txt");
-}
+//     println!("Removed file data.txt");
+// }
 
 fn read_db() {
     // Read a file in the local file system
@@ -38,6 +38,6 @@ fn main() {
     println!("Hello, world!");
 
     // Create a file
-    create_db()
-    read_db()
+    create_db();
+    read_db();
 }
