@@ -1,8 +1,8 @@
 use growers::Grower;
 mod growers;
 use std::fs::File;
-use std::io::Read;
-use std::io::Write;
+use std::io::{Read, Write};
+use std::{thread, time};
 
 // Possibly create a trait called persistable
 fn create_db() {
@@ -40,4 +40,11 @@ fn main() {
     // Create a file
     create_db();
     read_db();
+
+    while true {
+        let ten_millis = time::Duration::from_secs(1);
+
+        thread::sleep(ten_millis);
+        println!("Current time");
+    }
 }
