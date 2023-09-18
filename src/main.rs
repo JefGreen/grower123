@@ -18,9 +18,16 @@ fn remove_db() {
 }
 
 fn read_db() {
-    let mut data_file = File::open("data.json").expect("creation failed");
+    // Read a file in the local file system
+    let mut data_file = File::open("data.json").unwrap();
 
-    data_file.read().expect("write failed");
+    // Create an empty mutable string
+    let mut file_content = String::new();
+
+    // Copy contents of file to a mutable string
+    data_file.read_to_string(&mut file_content).unwrap();
+
+    println!("File content: {:?}", file_content);
 }
 
 fn main() {
@@ -32,4 +39,5 @@ fn main() {
 
     // Create a file
     create_db()
+    read_db()
 }
