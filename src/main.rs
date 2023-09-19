@@ -1,5 +1,7 @@
 use growers::Grower;
 mod growers;
+use plantable::Microgreen;
+mod plantable;
 use std::fs::File;
 use std::io::{Read, Write};
 use std::{thread, time};
@@ -30,10 +32,19 @@ fn read_db() {
     println!("File content: {:?}", file_content);
 }
 
+struct Batch {
+    // a plant type being grown by a grower at a specific time
+    grower: dyn Grower,
+    plant_type: dyn Plantable,
+    planted_at: u32,
+}
+
 fn main() {
     let grower = growers::MockedPie::new(4, 5);
 
     grower.water();
+
+    // Batch::new();
 
     println!("Hello, world!");
 
