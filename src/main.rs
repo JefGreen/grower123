@@ -13,12 +13,7 @@ fn create_db() {
     data_file.write("{}".as_bytes()).expect("write failed");
 }
 
-// fn remove_db() {
-//     fs::remove_file("data.json").expect("could not remove file");
-
-//     println!("Removed file data.txt");
-// }
-
+// Should save exist inside water?
 fn read_db() {
     // Read a file in the local file system
     let mut data_file = File::open("data.json").unwrap();
