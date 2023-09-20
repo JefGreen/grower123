@@ -1,6 +1,6 @@
 use growers::Grower;
 mod growers;
-use plantable::Microgreen;
+use plantable::{Microgreen, Plantable};
 mod plantable;
 use std::fs::File;
 use std::io::{Read, Write};
