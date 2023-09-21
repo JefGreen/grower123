@@ -3,12 +3,19 @@ use crate::plantable::Plantable;
 // List basic needs
 pub struct Microgreen {}
 
+impl Microgreen {
+    pub fn new() -> Microgreen {
+        println! {"made it here"};
+        Microgreen {}
+    }
+}
+
 impl Plantable for Microgreen {
-    fn needs_water(&self) -> bool {
+    fn water_requirements(&self) -> bool {
         return true;
     }
 
-    fn needs_light(&self) -> bool {
+    fn light_requirements(&self) -> bool {
         return true;
     }
 }

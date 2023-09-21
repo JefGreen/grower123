@@ -34,21 +34,30 @@ struct Batch {
     planted_at: u32,
 }
 
+// impl needs_watering
+
 fn main() {
     let grower = growers::MockedPie::new(4, 5);
+    let sunflower = plantable::Microgreen::new();
 
     grower.water();
-
-    // Batch::new();
-
-    println!("Hello, world!");
 
     // Create a file
     create_db();
     read_db();
 
+    let batches: [Batch; 1] = [Batch {
+        grower: &grower,
+        plant_type: &sunflower,
+        planted_at: 4,
+    }];
+
     let ten_millis = time::Duration::from_secs(1);
     loop {
+        for batch in &batches {
+            batch.grower.water();
+        }
+
         thread::sleep(ten_millis);
         println!("Current time");
     }
