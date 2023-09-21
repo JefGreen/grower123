@@ -37,7 +37,7 @@ struct Batch {
 // impl needs_watering
 
 fn main() {
-    let grower = growers::MockedPie::new(4, 5);
+    let grower = growers::MockedPie::new(&4, &5);
     let sunflower = plantable::Microgreen::new();
 
     grower.water();

@@ -15,7 +15,7 @@ impl<'a> MockedPie<'a> {
     }
 }
 
-impl Grower for MockedPie {
+impl<'a> Grower for MockedPie<'a> {
     fn water(&self) {
         println!("watering using port {}", self.water_port);
     }
