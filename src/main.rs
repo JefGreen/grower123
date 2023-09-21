@@ -47,9 +47,8 @@ fn main() {
     create_db();
     read_db();
 
+    let ten_millis = time::Duration::from_secs(1);
     while true {
-        let ten_millis = time::Duration::from_secs(1);
-
         thread::sleep(ten_millis);
         println!("Current time");
     }
