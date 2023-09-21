@@ -1,6 +1,6 @@
 use growers::Grower;
 mod growers;
-use plantable::{Microgreen, Plantable};
+use plantable::Plantable;
 mod plantable;
 use std::fs::File;
 use std::io::{Read, Write};
@@ -29,8 +29,8 @@ fn read_db() {
 
 struct Batch {
     // a plant type being grown by a grower at a specific time
-    grower: dyn Grower,
-    plant_type: dyn Plantable,
+    grower: &'static dyn Grower,
+    plant_type: &'static dyn Plantable,
     planted_at: u32,
 }
 
