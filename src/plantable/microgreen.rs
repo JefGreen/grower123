@@ -4,11 +4,11 @@ use crate::plantable::Plantable;
 pub struct Microgreen {}
 
 impl Plantable for Microgreen {
-    fn needs_water(&self) {
+    fn needs_water(&self) -> bool {
         return true;
     }
 
-    fn needs_light(&self) {
+    fn needs_light(&self) -> bool {
         return true;
     }
 }
