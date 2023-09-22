@@ -34,6 +34,10 @@ struct Batch {
     planted_at: u32,
 }
 
+struct Log {
+    timestamp: u32,
+}
+
 // impl needs_watering
 
 fn main() {
@@ -56,10 +60,13 @@ fn main() {
     // Index reccords on a counter and reset counter when limit is reached
 
     let ten_millis = time::Duration::from_secs(1);
+
+    // Load vector from json file
     loop {
         for batch in &batches {
             batch.grower.water();
         }
+        stack
 
         thread::sleep(ten_millis);
         println!("Current time");
