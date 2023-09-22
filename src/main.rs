@@ -52,6 +52,9 @@ fn main() {
         planted_at: 4,
     }];
 
+    // How to limit the amount of entries in a json?
+    // Index reccords on a counter and reset counter when limit is reached
+
     let ten_millis = time::Duration::from_secs(1);
     loop {
         for batch in &batches {
