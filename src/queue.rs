@@ -4,4 +4,6 @@ pub struct Queue<T> {
     data: Vec<Option<T>>,
 }
 
+// Add size
+
 // TODO: implement proper queue.
