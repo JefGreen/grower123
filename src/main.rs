@@ -62,13 +62,16 @@ fn main() {
     // Index reccords on a counter and reset counter when limit is reached
 
     let ten_millis = time::Duration::from_secs(1);
-
+    let mut logs = Queue::new(10);
     // Load vector from json file
+    let mut i = 0;
     loop {
         for batch in &batches {
             batch.grower.water();
         }
-        // stack
+        logs.add(i);
+        println!("{:?}", logs.peek());
+        i += 1;
 
         thread::sleep(ten_millis);
         println!("Current time");

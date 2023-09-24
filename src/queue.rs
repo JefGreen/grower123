@@ -16,7 +16,6 @@ impl<T> Queue<T> {
         if self.queue.len() > self.max_size {
             self.queue.remove(0);
         };
-        // return ();
     }
 
     pub fn peek(&self) -> Option<&T> {
