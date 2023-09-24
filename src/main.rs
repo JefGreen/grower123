@@ -2,6 +2,8 @@ use growers::Grower;
 mod growers;
 use plantable::Plantable;
 mod plantable;
+use queue::Queue;
+mod queue;
 use std::fs::File;
 use std::io::{Read, Write};
 use std::{thread, time};
