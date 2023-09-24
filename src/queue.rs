@@ -1,9 +1,20 @@
 pub struct Queue<T> {
-    head: usize,
-    tail: usize,
-    data: Vec<Option<T>>,
+    queue: Vec<T>,
+    maxSize: u32,
 }
 
-// Add size
+impl<T> Queue<T> {
+    fn new(maxSize: u32) -> Self {
+        Queue {
+            queue: Vec::new(),
+            maxSize,
+        }
+    }
 
-// TODO: implement proper queue.
+    fn add(&mut self, item: T) {
+        self.queue.push(item);
+        if self.queue.len() > self.maxSize {
+            self.queue.remove(0)
+        };
+    }
+}

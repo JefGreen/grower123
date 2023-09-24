@@ -66,7 +66,7 @@ fn main() {
         for batch in &batches {
             batch.grower.water();
         }
-        stack
+        // stack
 
         thread::sleep(ten_millis);
         println!("Current time");
