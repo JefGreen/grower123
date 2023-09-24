@@ -52,25 +52,25 @@ fn main() {
     create_db();
     read_db();
 
-    let batches: [Batch; 1] = [Batch {
-        grower: &grower,
-        plant_type: &sunflower,
-        planted_at: 4,
-    }];
+    // let batches: [Batch; 1] = [Batch {
+    //     grower: &grower,
+    //     plant_type: &sunflower,
+    //     planted_at: 4,
+    // }];
 
     // How to limit the amount of entries in a json?
     // Index reccords on a counter and reset counter when limit is reached
 
     let ten_millis = time::Duration::from_secs(1);
-    let mut logs = Queue::new(10);
+    let mut logs = Queue::new(11);
     // Load vector from json file
     let mut i = 0;
     loop {
-        for batch in &batches {
-            batch.grower.water();
-        }
+        // for batch in &batches {
+        //     batch.grower.water();
+        // }
         logs.add(i);
-        println!("{:?}", logs.peek());
+        println!("{:?} at {}", logs.peek(), i);
         i += 1;
 
         thread::sleep(ten_millis);
