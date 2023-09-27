@@ -20,7 +20,11 @@ impl<'a> Grower for MockedPie<'a> {
         println!("watering using port {}", self.water_port);
     }
 
-    fn check_if_need_water(&self) {
+    // fn turn_off_water(&self) {
+    //     println!("watering using port {}", self.water_port);
+    // }
+
+    fn mesure_moister(&self) {
         // How would the grower know?
         println!("Check if plant needs water {}", self.water_port);
     }

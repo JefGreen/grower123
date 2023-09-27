@@ -4,6 +4,7 @@ use plantable::Plantable;
 mod plantable;
 use queue::Queue;
 mod queue;
+use chrono::{DateTime, Local};
 use std::fs::File;
 use std::io::{Read, Write};
 use std::{thread, time};
@@ -34,6 +35,8 @@ struct Batch {
     grower: &'static dyn Grower,
     plant_type: &'static dyn Plantable,
     planted_at: u32,
+    last_watered_at: u32,
+    last_light_at: u32,
 }
 
 struct Log {
@@ -41,10 +44,11 @@ struct Log {
 }
 
 // impl needs_watering
+// needs_water
 
 fn main() {
     let grower = growers::MockedPie::new(&4, &5);
-    let sunflower = plantable::Microgreen::new();
+    // let sunflower = plantable::Microgreen::new();
 
     grower.water();
 
