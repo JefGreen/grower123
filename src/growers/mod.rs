@@ -5,6 +5,8 @@ pub trait Grower {
     // what if it returned the next task instead like stop the water or turn off the lamps
     fn water(&self) -> ();
 
+    fn check_if_need_water(&self) -> ();
+
     fn light(&self) -> ();
 }
 
