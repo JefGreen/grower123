@@ -1,7 +1,7 @@
 use growers::Grower;
 mod growers;
-use plantable::Plantable;
-mod plantable;
+// use plantable::Plantable;
+// mod plantable;
 use queue::Queue;
 mod queue;
 use std::fs::File;
@@ -29,10 +29,15 @@ fn read_db() {
     println!("File content: {:?}", file_content);
 }
 
+struct Plant {
+    min_moisture: u32,
+    light_duration: u32,
+}
+
 struct Batch {
     // a plant type being grown by a grower at a specific time
     grower: &'static dyn Grower,
-    plant_type: &'static dyn Plantable,
+    plant_type: Plant,
     planted_at: u32,
     last_watered_at: u32,
     last_light_at: u32,
