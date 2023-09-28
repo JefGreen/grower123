@@ -4,7 +4,6 @@ use plantable::Plantable;
 mod plantable;
 use queue::Queue;
 mod queue;
-use chrono::{DateTime, Local};
 use std::fs::File;
 use std::io::{Read, Write};
 use std::{thread, time};
@@ -50,7 +49,7 @@ fn main() {
     let grower = growers::MockedPie::new(&4, &5);
     // let sunflower = plantable::Microgreen::new();
 
-    grower.water();
+    grower.water(true);
 
     // Create a file
     create_db();
@@ -78,6 +77,5 @@ fn main() {
         i += 1;
 
         thread::sleep(ten_millis);
-        println!("Current time");
     }
 }
