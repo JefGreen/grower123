@@ -31,7 +31,7 @@ fn read_db() {
 
 struct Plant {
     min_moisture: u32,
-    light_duration: u32,
+    hours_of_light_required: u32,
 }
 
 struct Batch {
@@ -47,6 +47,7 @@ struct Log {
     timestamp: u32,
 }
 
+fn needs_light() {}
 // impl needs_watering
 // needs_water
 
