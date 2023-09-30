@@ -3,6 +3,8 @@ use crate::growers::Grower;
 pub struct MockedPie<'a> {
     water_port: &'a u8,
     light_port: &'a u8,
+    water_port_current_state: bool,
+    light_port_current_state: bool,
 }
 
 impl<'a> MockedPie<'a> {
@@ -10,6 +12,8 @@ impl<'a> MockedPie<'a> {
         MockedPie {
             water_port,
             light_port,
+            water_port_current_state: false,
+            light_port_current_state: false,
         }
     }
 }
