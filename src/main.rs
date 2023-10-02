@@ -43,6 +43,24 @@ struct Batch {
     last_light_at: u32,
 }
 
+type Callback = fn();
+
+struct Task {
+    created_at: u32,
+    due_by: u32,
+    action: Callback,
+}
+
+impl Task {
+    pub fn new(action: Callback, due_by: u32) -> Task {
+        Task {
+            action,
+            created_at: 043,
+            due_by: 045,
+        }
+    }
+}
+
 struct Log {
     timestamp: u32,
 }
@@ -61,14 +79,11 @@ fn main() {
     create_db();
     read_db();
 
-    // let batches: [Batch; 1] = [Batch {
-    //     grower: &grower,
-    //     plant_type: &sunflower,
-    //     planted_at: 4,
-    // }];
-
     let ten_millis = time::Duration::from_secs(1);
     let mut logs = Queue::new(11);
+    let mut tasks = Queue::new(11);
+
+    tasks.add(item);
     // Load vector from json file
     let mut i = 0;
     loop {

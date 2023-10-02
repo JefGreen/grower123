@@ -1,4 +1,8 @@
 use crate::growers::Grower;
+use gpio::{GpioIn, GpioOut};
+
+// let mut gpio23 = gpio::sysfs::SysFsGpioInput::open(23).unwrap();
+// let mut gpio24 = gpio::sysfs::SysFsGpioOutput::open(24).unwrap();
 
 pub struct MockedPie<'a> {
     water_port: &'a u8,
