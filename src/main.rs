@@ -45,6 +45,7 @@ struct Batch {
 
 type Callback = fn();
 
+// Saving a callback could refer to method name in a hashmap
 struct Task {
     created_at: u32,
     due_by: u32,
