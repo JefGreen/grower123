@@ -137,8 +137,9 @@ fn main() {
         println!("{:?} at {}", logs.peek(), i);
         i += 1;
 
-        let p = tasks.pop().unwrap();
-        println!("Due by: {}", p.due_by);
+        let t = tasks.pop().unwrap();
+        println!("Due by: {}", t.due_by);
+        (t.action)();
         // p.action();
 
         thread::sleep(ten_millis);
