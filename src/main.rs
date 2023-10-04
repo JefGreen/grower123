@@ -4,6 +4,8 @@ mod growers;
 // mod plantable;
 use queue::Queue;
 mod queue;
+use std::cmp::Ordering;
+use std::collections::BinaryHeap;
 use std::fs::File;
 use std::io::{Read, Write};
 use std::{thread, time};
@@ -59,6 +61,26 @@ impl Task {
             created_at: 043,
             due_by: 045,
         }
+    }
+}
+
+impl Eq for Task {}
+
+impl Ord for Task {
+    fn cmp(&self, other: &Task) -> Ordering {
+        self.due_by.cmp(&other.due_by)
+    }
+}
+
+impl PartialOrd for Task {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for Task {
+    fn eq(&self, other: &Task) -> bool {
+        self.due_by == other.due_by
     }
 }
 
