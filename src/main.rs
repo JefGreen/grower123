@@ -45,17 +45,17 @@ struct Batch {
     last_light_at: u32,
 }
 
-type Callback = fn();
+// type Callback = fn();
 
 // Saving a callback could refer to method name in a hashmap
 struct Task {
     created_at: u32,
     due_by: u32,
-    action: Callback,
+    action: fn(),
 }
 
 impl Task {
-    pub fn new(action: Callback, due_by: u32) -> Task {
+    pub fn new(action: fn(), due_by: u32) -> Task {
         Task {
             action,
             created_at: 043,
@@ -68,7 +68,7 @@ impl Eq for Task {}
 
 impl Ord for Task {
     fn cmp(&self, other: &Task) -> Ordering {
-        self.due_by.cmp(&other.due_by)
+        self.due_by.cmp(&other.due_by).reverse()
     }
 }
 
@@ -97,6 +97,13 @@ fn main() {
     // let sunflower = plantable::Microgreen::new();
 
     grower.water(true);
+    fn water() {
+        println!("Calling water method")
+    }
+
+    fn light_on() {
+        println!("Calling light on method")
+    }
 
     // Create a file
     create_db();
@@ -104,9 +111,22 @@ fn main() {
 
     let ten_millis = time::Duration::from_secs(1);
     let mut logs = Queue::new(11);
-    let mut tasks = Queue::new(11);
+    let mut tasks: BinaryHeap<Task> = BinaryHeap::new();
 
-    tasks.add(item);
+    let a: Task = Task {
+        created_at: 45,
+        due_by: 1,
+        action: water,
+    };
+
+    let b: Task = Task {
+        created_at: 45,
+        due_by: 2,
+        action: light_on,
+    };
+
+    tasks.push(a);
+    tasks.push(b);
     // Load vector from json file
     let mut i = 0;
     loop {
@@ -116,6 +136,10 @@ fn main() {
         logs.add(i);
         println!("{:?} at {}", logs.peek(), i);
         i += 1;
+
+        let p = tasks.pop().unwrap();
+        println!("Due by: {}", p.due_by);
+        // p.action();
 
         thread::sleep(ten_millis);
     }
