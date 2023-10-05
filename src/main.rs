@@ -3,6 +3,7 @@ mod growers;
 // use plantable::Plantable;
 // mod plantable;
 use queue::Queue;
+use std::time::{Duration, SystemTime};
 mod queue;
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
@@ -132,16 +133,32 @@ fn main() {
     loop {
         // for batch in &batches {
         //     batch.grower.water();
-        // }
+        // } back up bd avant une release
         logs.add(i);
         println!("{:?} at {}", logs.peek(), i);
         i += 1;
 
-        let t = tasks.pop().unwrap();
-        println!("Due by: {}", t.due_by);
-        (t.action)();
-        // p.action();
+        let task = tasks.pop();
 
+        match task {
+            Some(t) => {
+                println!("Due by: {}", t.due_by);
+                (t.action)();
+            }
+            None => {}
+        }
+
+        // p.action();
+        // let now = SystemTime::now();
+        match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+            Ok(now) => {
+                println!("time here {}", now.as_secs());
+            }
+            Err(e) => {
+                // an error occurred!
+                println!("Error: {e:?}");
+            }
+        }
         thread::sleep(ten_millis);
     }
 }
