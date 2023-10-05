@@ -110,8 +110,7 @@ fn main() {
     create_db();
     read_db();
 
-    let ten_millis = time::Duration::from_secs(1);
-    let mut logs = Queue::new(11);
+    let one_second = time::Duration::from_secs(1);
     let mut tasks: BinaryHeap<Task> = BinaryHeap::new();
 
     let a: Task = Task {
@@ -153,6 +152,6 @@ fn main() {
                 println!("Error: {e:?}");
             }
         }
-        thread::sleep(ten_millis);
+        thread::sleep(one_second);
     }
 }
