@@ -129,33 +129,27 @@ fn main() {
     tasks.push(a);
     tasks.push(b);
     // Load vector from json file
-    let mut i = 0;
+
     loop {
         // for batch in &batches {
         //     batch.grower.water();
         // } back up bd avant une release
-        logs.add(i);
-        println!("{:?} at {}", logs.peek(), i);
-        i += 1;
-
-        let task = tasks.pop();
-
-        match task {
-            Some(t) => {
-                println!("Due by: {}", t.due_by);
-                (t.action)();
-            }
-            None => {}
-        }
 
         // p.action();
-        // let now = SystemTime::now();
         match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
             Ok(now) => {
                 println!("time here {}", now.as_secs());
+                let task = tasks.peek();
+
+                match task {
+                    Some(t) => {
+                        println!("Due by: {}", t.due_by);
+                        (t.action)();
+                    }
+                    None => {}
+                }
             }
             Err(e) => {
-                // an error occurred!
                 println!("Error: {e:?}");
             }
         }
