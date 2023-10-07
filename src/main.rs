@@ -135,22 +135,21 @@ fn main() {
         // } back up bd avant une release
 
         // p.action();
-        match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
-            Ok(now) => {
-                println!("time here {}", now.as_secs());
-                let task = tasks.peek();
+        let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) -> Result<Duration, ParseIntError> {
+            Ok(now) => {now.as_secs()};
+            Err(e) => return Err(e),
+        };
 
-                match task {
-                    Some(t) => {
-                        println!("Due by: {}", t.due_by);
-                        (t.action)();
-                    }
-                    None => {}
-                }
+        // .as_secs()
+
+        let task = tasks.peek();
+
+        match task {
+            Some(t) => {
+                println!("Due by: {}", t.due_by);
+                (t.action)();
             }
-            Err(e) => {
-                println!("Error: {e:?}");
-            }
+            None => {}
         }
         thread::sleep(one_second);
     }
