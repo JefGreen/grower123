@@ -11,6 +11,12 @@ use std::fs::File;
 use std::io::{Read, Write};
 use std::{thread, time};
 
+struct GPIO;
+
+impl GPIO {
+    pub fn set_ouput(pin: u32) {}
+}
+
 // Possibly create a trait called persistable
 fn create_db() {
     let mut data_file = File::create("data.json").expect("creation failed");
@@ -135,9 +141,9 @@ fn main() {
         // } back up bd avant une release
 
         // p.action();
-        let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) -> Result<Duration, ParseIntError> {
-            Ok(now) => {now.as_secs()};
-            Err(e) => return Err(e),
+        let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+            Ok(now) => now.as_secs(),
+            Err(e) => Err(e),
         };
 
         // .as_secs()
