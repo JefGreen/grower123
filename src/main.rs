@@ -21,8 +21,24 @@ fn get_register_for_raspberry_pi3_b(pin: u32) -> u32 {
 
 struct GPIO;
 
+const GPIO_FSEL0: u32 = 0x3F20_0000;
+const GPIO_FSEL1: u32 = 0x3F20_0004;
+const GPIO_FSEL2: u32 = 0x3F20_0008;
+
 impl GPIO {
-    pub fn set_ouput(pin: u32) {}
+    pub fn set_ouput(pin: u32) {
+        let reg = pin / 10;
+        let register = match reg {
+            0 => GPIO_FSEL0,
+            1 => GPIO_FSEL1,
+            2 => GPIO_FSEL2,
+            _ => panic!("Invalid pin number!"),
+        };
+
+        let mut val: u32 = 0;
+
+        unsafe {}
+    }
 }
 
 // Possibly create a trait called persistable
