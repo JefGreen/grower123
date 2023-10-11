@@ -12,15 +12,6 @@ use std::io::{Read, Write};
 use std::{thread, time};
 
 // TODO: change for embeded
-
-fn get_register_for_raspberry_pi3_b(pin: u32) -> u32 {
-    let reg: u32 = pin / 10;
-    return match reg {
-        0 => 34,
-        _ => panic!("Something has gone wrong!"),
-    };
-}
-
 struct GPIO;
 
 const GPIO_FSEL0: u32 = 0x3F20_0000;
