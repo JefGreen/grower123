@@ -1,5 +1,3 @@
-use growers::Grower;
-mod growers;
 // use plantable::Plantable;
 // mod plantable;
 use queue::Queue;
@@ -117,10 +115,8 @@ fn needs_light() {}
 // needs_water
 
 fn main() {
-    let grower = growers::MockedPie::new(&4, &5);
     // let sunflower = plantable::Microgreen::new();
 
-    grower.water(true);
     fn water() {
         println!("Calling water method")
     }
