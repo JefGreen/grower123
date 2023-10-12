@@ -1,5 +1,7 @@
 // use plantable::Plantable;
 // mod plantable;
+#![no_main]
+#![no_std]
 use queue::Queue;
 use std::time::{Duration, SystemTime};
 mod queue;
@@ -60,7 +62,6 @@ struct Plant {
 
 struct Batch {
     // a plant type being grown by a grower at a specific time
-    grower: &'static dyn Grower,
     plant_type: Plant,
     planted_at: u32,
     last_watered_at: u32,
