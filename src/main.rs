@@ -1,7 +1,66 @@
-// use plantable::Plantable;
-// mod plantable;
 #![no_main]
 #![no_std]
+
+pub extern "C" fn _start() {
+    // let sunflower = plantable::Microgreen::new();
+
+    fn water() {
+        println!("Calling water method")
+    }
+
+    fn light_on() {
+        println!("Calling light on method")
+    }
+
+    // Create a file
+    create_db();
+    read_db();
+
+    let one_second = time::Duration::from_secs(1);
+    let mut tasks: BinaryHeap<Task> = BinaryHeap::new();
+
+    let a: Task = Task {
+        created_at: 45,
+        due_by: 1,
+        action: water,
+    };
+
+    let b: Task = Task {
+        created_at: 45,
+        due_by: 2,
+        action: light_on,
+    };
+
+    tasks.push(a);
+    tasks.push(b);
+    // Load vector from json file
+
+    loop {
+        // for batch in &batches {
+        //     batch.grower.water();
+        // } back up bd avant une release
+
+        // p.action();
+        let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+            Ok(now) => now.as_secs(),
+            Err(e) => Err(e),
+        };
+
+        // .as_secs()
+
+        let task = tasks.peek();
+
+        match task {
+            Some(t) => {
+                println!("Due by: {}", t.due_by);
+                (t.action)();
+            }
+            None => {}
+        }
+        thread::sleep(one_second);
+    }
+}
+
 use queue::Queue;
 use std::time::{Duration, SystemTime};
 mod queue;
@@ -114,63 +173,3 @@ struct Log {
 fn needs_light() {}
 // impl needs_watering
 // needs_water
-
-fn main() {
-    // let sunflower = plantable::Microgreen::new();
-
-    fn water() {
-        println!("Calling water method")
-    }
-
-    fn light_on() {
-        println!("Calling light on method")
-    }
-
-    // Create a file
-    create_db();
-    read_db();
-
-    let one_second = time::Duration::from_secs(1);
-    let mut tasks: BinaryHeap<Task> = BinaryHeap::new();
-
-    let a: Task = Task {
-        created_at: 45,
-        due_by: 1,
-        action: water,
-    };
-
-    let b: Task = Task {
-        created_at: 45,
-        due_by: 2,
-        action: light_on,
-    };
-
-    tasks.push(a);
-    tasks.push(b);
-    // Load vector from json file
-
-    loop {
-        // for batch in &batches {
-        //     batch.grower.water();
-        // } back up bd avant une release
-
-        // p.action();
-        let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
-            Ok(now) => now.as_secs(),
-            Err(e) => Err(e),
-        };
-
-        // .as_secs()
-
-        let task = tasks.peek();
-
-        match task {
-            Some(t) => {
-                println!("Due by: {}", t.due_by);
-                (t.action)();
-            }
-            None => {}
-        }
-        thread::sleep(one_second);
-    }
-}
