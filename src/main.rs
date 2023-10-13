@@ -2,6 +2,7 @@
 #![no_std]
 
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
+// Raspberry pi linux kernel: https://github.com/raspberrypi/linux
 
 pub extern "C" fn _start() {
     // let sunflower = plantable::Microgreen::new();
