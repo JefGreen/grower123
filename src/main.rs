@@ -2,10 +2,14 @@
 #![no_std]
 
 mod bsp;
+use core::panic::PanicInfo;
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
 
-pub extern "C" fn _start() {
+// good read: https://medium.com/swlh/compiling-rust-for-raspberry-pi-arm-922b55dbb050
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
     // let sunflower = plantable::Microgreen::new();
     use core::time::Duration;
 
@@ -65,6 +69,9 @@ pub extern "C" fn _start() {
         thread::sleep(one_second);
     }
 }
+
+#[panic_handler]
+fn panic() {}
 
 use queue::Queue;
 use std::time::{Duration, SystemTime};
