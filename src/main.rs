@@ -1,7 +1,6 @@
 #![no_main]
 #![no_std]
 
-mod bsp;
 use core::panic::PanicInfo;
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
@@ -13,14 +12,6 @@ pub extern "C" fn _start() -> ! {
     // let sunflower = plantable::Microgreen::new();
     use core::time::Duration;
 
-    fn water() {
-        println!("Calling water method")
-    }
-
-    fn light_on() {
-        println!("Calling light on method")
-    }
-
     // Create a file
     create_db();
     read_db();
@@ -28,20 +19,20 @@ pub extern "C" fn _start() -> ! {
     let one_second = time::Duration::from_secs(1);
     let mut tasks: BinaryHeap<Task> = BinaryHeap::new();
 
-    let a: Task = Task {
-        created_at: 45,
-        due_by: 1,
-        action: water,
-    };
+    // let a: Task = Task {
+    //     created_at: 45,
+    //     due_by: 1,
+    //     action: water,
+    // };
 
-    let b: Task = Task {
-        created_at: 45,
-        due_by: 2,
-        action: light_on,
-    };
+    // let b: Task = Task {
+    //     created_at: 45,
+    //     due_by: 2,
+    //     action: light_on,
+    // };
 
-    tasks.push(a);
-    tasks.push(b);
+    // tasks.push(a);
+    // tasks.push(b);
     // Load vector from json file
 
     loop {
@@ -61,7 +52,7 @@ pub extern "C" fn _start() -> ! {
 
         match task {
             Some(t) => {
-                println!("Due by: {}", t.due_by);
+                // println!("Due by: {}", t.due_by);
                 (t.action)();
             }
             None => {}
@@ -71,15 +62,15 @@ pub extern "C" fn _start() -> ! {
 }
 
 #[panic_handler]
-fn panic() {}
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
 
-use queue::Queue;
-use std::time::{Duration, SystemTime};
-mod queue;
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 use std::fs::File;
 use std::io::{Read, Write};
+use std::time::{Duration, SystemTime};
 use std::{thread, time};
 
 // TODO: change for embeded
