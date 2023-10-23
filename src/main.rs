@@ -46,8 +46,6 @@ pub extern "C" fn _start() -> ! {
             Err(e) => Err(e),
         };
 
-        // .as_secs()
-
         let task = tasks.peek();
 
         match task {
