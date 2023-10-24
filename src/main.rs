@@ -8,7 +8,7 @@ use core::panic::PanicInfo;
 // good read: https://medium.com/swlh/compiling-rust-for-raspberry-pi-arm-922b55dbb050
 
 mod boot {
-    use code::arch::global_asm;
+    use core::arch::global_asm;
 
     global_asm!(".section .text._start");
 }
