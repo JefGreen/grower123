@@ -4,19 +4,19 @@
 use core::panic::PanicInfo;
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
-
+// From official doc: https://docs.rust-embedded.org/embedonomicon/smallest-no-std.html
 // good read: https://medium.com/swlh/compiling-rust-for-raspberry-pi-arm-922b55dbb050
 
-mod boot {
-    use core::arch::global_asm;
+// mod boot {
+//     use core::arch::global_asm;
 
-    global_asm!(".section .text._start");
-}
+//     global_asm!(".section .text _start");
+// }
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     // let sunflower = plantable::Microgreen::new();
-    use core::time::Duration;
+    // use core::time::Duration;
 
     // Create a file
     // create_db();
@@ -66,10 +66,9 @@ pub extern "C" fn _start() -> ! {
 }
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+fn panic(_panic: &PanicInfo<'_>) -> ! {
     loop {}
 }
-
 // use std::cmp::Ordering;
 // use std::collections::BinaryHeap;
 // use std::fs::File;

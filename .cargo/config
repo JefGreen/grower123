@@ -1,0 +1,8 @@
+[build]
+target = "armv7a-none-eabi"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
