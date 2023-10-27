@@ -7,11 +7,11 @@ use core::panic::PanicInfo;
 // From official doc: https://docs.rust-embedded.org/embedonomicon/smallest-no-std.html
 // good read: https://medium.com/swlh/compiling-rust-for-raspberry-pi-arm-922b55dbb050
 
-// mod boot {
-//     use core::arch::global_asm;
+mod boot {
+    use core::arch::global_asm;
 
-//     global_asm!(".section .text _start");
-// }
+    global_asm!(".section .text._start");
+}
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
