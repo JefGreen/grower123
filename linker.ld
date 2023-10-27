@@ -5,8 +5,8 @@ SECTIONS
     . = 0x8000;
     __start = .;
     .text :
-    {
-        KEEP(*(.text.boot))
+    {   
+        *(.text._start)
         *(.text)
     }
     . = ALIGN(4096);
@@ -25,6 +25,10 @@ SECTIONS
     {
         bss = .;
         *(.bss)
+    }
+    .ARM.exidx :
+    {
+        *(.ARM.exidx*)
     }
     . = ALIGN(4096); 
     __bss_end = .;
