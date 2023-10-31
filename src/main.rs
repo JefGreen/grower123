@@ -6,12 +6,15 @@ use core::panic::PanicInfo;
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
 // From official doc: https://docs.rust-embedded.org/embedonomicon/smallest-no-std.html
 // good read: https://medium.com/swlh/compiling-rust-for-raspberry-pi-arm-922b55dbb050
-
+// pins setup https://pi4j.com/1.2/pins/model-3b-rev1.html
+// datasheet: https://www.raspberrypi.org/app/uploads/2012/02/BCM2835-ARM-Peripherals.pdf
 mod boot {
     use core::arch::global_asm;
 
     global_asm!(".section .text._start");
 }
+
+const GPIO_FSEL0: u32 = 0x3F20_0000
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
