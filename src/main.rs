@@ -14,7 +14,27 @@ mod boot {
     global_asm!(".section .text._start");
 }
 
-const GPIO_FSEL0: u32 = 0x3F20_0000
+struct GPIO;
+
+const GPIO_FSEL0: u32 = 0x3F20_0000;
+const GPIO_FSEL1: u32 = 0x3F20_0004;
+const GPIO_FSEL2: u32 = 0x3F20_0008;
+
+impl GPIO {
+    pub fn set_ouput(pin: u32) {
+        let reg = pin / 10;
+        let register = match reg {
+            0 => GPIO_FSEL0,
+            1 => GPIO_FSEL1,
+            2 => GPIO_FSEL2,
+            _ => panic!("Invalid pin number!"),
+        };
+
+        let mut val: u32 = 0;
+
+        unsafe {}
+    }
+}
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
@@ -80,27 +100,6 @@ fn panic(_panic: &PanicInfo<'_>) -> ! {
 // use std::{thread, time};
 
 // TODO: change for embeded
-// struct GPIO;
-
-// const GPIO_FSEL0: u32 = 0x3F20_0000;
-// const GPIO_FSEL1: u32 = 0x3F20_0004;
-// const GPIO_FSEL2: u32 = 0x3F20_0008;
-
-// impl GPIO {
-//     pub fn set_ouput(pin: u32) {
-//         let reg = pin / 10;
-//         let register = match reg {
-//             0 => GPIO_FSEL0,
-//             1 => GPIO_FSEL1,
-//             2 => GPIO_FSEL2,
-//             _ => panic!("Invalid pin number!"),
-//         };
-
-//         let mut val: u32 = 0;
-
-//         unsafe {}
-//     }
-// }
 
 // Possibly create a trait called persistable
 // fn create_db() {
