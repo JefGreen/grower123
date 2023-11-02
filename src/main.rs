@@ -20,6 +20,9 @@ const GPIO_FSEL0: u32 = 0x3F20_0000;
 const GPIO_FSEL1: u32 = 0x3F20_0004;
 const GPIO_FSEL2: u32 = 0x3F20_0008;
 
+const GPIO_SET0: u32 = 0x3f20_001c;
+const GPIO_CLR0: u32 = 0x3f20_0028;
+
 impl GPIO {
     pub fn set_ouput(pin: u32) {
         let reg = pin / 10;
@@ -44,11 +47,64 @@ impl GPIO {
         val = val & !(mask);
 
         val |= 1 << pinnum * 3;
+
+        unsafe {
+            core::ptr::write_volatile(register as *mut u32, val);
+        }
+    }
+
+    pub fn set(pin: u32) {
+        let bitposition = pin;
+        let mut val: u32 = 0;
+
+        unsafe {
+            val = core::ptr::read_volatile(GPIO_SET0 as *mut u32);
+        }
+
+        val |= 1 << bitposition;
+
+        unsafe {
+            core::ptr::write_volatile(GPIO_SET0 as *mut u32, val);
+        }
+    }
+
+    pub fn clear(pin: u32) {
+        let bitposition = pin;
+        let mut val: u32 = 0;
+
+        unsafe {
+            val = core::ptr::read_volatile(GPIO_CLR0 as *mut u32);
+        }
+
+        val |= 1 << bitposition;
+
+        unsafe {
+            core::ptr::write_volatile(GPIO_CLR0 as *mut u32, val);
+        }
     }
 }
 
+#[link_section = ".text._start"]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    GPIO::set_ouput(21);
+
+    loop {
+        GPIO::set(21);
+
+        for _ in 1..50000 {
+            unsafe {
+                asm!("nop");
+            }
+        }
+        GPIO::clear(21);
+
+        for _ in 1..50000 {
+            unsafe {
+                asm!("nop");
+            }
+        }
+    }
     // let sunflower = plantable::Microgreen::new();
     // use core::time::Duration;
 
@@ -75,28 +131,26 @@ pub extern "C" fn _start() -> ! {
     // tasks.push(b);
     // Load vector from json file
 
-    loop {
-        // for batch in &batches {
-        //     batch.grower.water();
-        // } back up bd avant une release
+    // for batch in &batches {
+    //     batch.grower.water();
+    // } back up bd avant une release
 
-        // p.action();
-        // let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
-        //     Ok(now) => now.as_secs(),
-        //     Err(e) => Err(e),
-        // };
+    // p.action();
+    // let now = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+    //     Ok(now) => now.as_secs(),
+    //     Err(e) => Err(e),
+    // };
 
-        // let task = tasks.peek();
+    // let task = tasks.peek();
 
-        // match task {
-        //     Some(t) => {
-        //         // println!("Due by: {}", t.due_by);
-        //         (t.action)();
-        //     }
-        //     None => {}
-        // }
-        // thread::sleep(one_second);
-    }
+    // match task {
+    //     Some(t) => {
+    //         // println!("Due by: {}", t.due_by);
+    //         (t.action)();
+    //     }
+    //     None => {}
+    // }
+    // thread::sleep(one_second);
 }
 
 #[panic_handler]
