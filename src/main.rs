@@ -85,6 +85,7 @@ impl GPIO {
 }
 
 fn sleep() {
+    // See https://developer.arm.com/documentation/den0013/d/ARM-Thumb-Unified-Assembly-Language-Instructions/Miscellaneous-instructions/Other-instructions
     for _ in 1..50000 {
         unsafe {
             asm!("nop");
