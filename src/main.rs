@@ -53,7 +53,7 @@ impl GPIO {
         }
     }
 
-    pub fn set(pin: u32) {
+    pub fn on(pin: u32) {
         let bitposition = pin;
         let mut val: u32 = 0;
 
@@ -68,7 +68,7 @@ impl GPIO {
         }
     }
 
-    pub fn clear(pin: u32) {
+    pub fn off(pin: u32) {
         let bitposition = pin;
         let mut val: u32 = 0;
 
@@ -84,20 +84,28 @@ impl GPIO {
     }
 }
 
+fn sleep() {
+    for _ in 1..50000 {
+        unsafe {
+            asm!("nop");
+        }
+    }
+}
+
 #[link_section = ".text._start"]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     GPIO::set_ouput(21);
 
     loop {
-        GPIO::set(21);
+        GPIO::on(21);
 
         for _ in 1..50000 {
             unsafe {
                 asm!("nop");
             }
         }
-        GPIO::clear(21);
+        GPIO::off(21);
 
         for _ in 1..50000 {
             unsafe {
