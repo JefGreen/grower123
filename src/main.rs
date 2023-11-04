@@ -40,6 +40,7 @@ impl GPIO {
         }
 
         let mut mask: u32 = 0b111;
+        // Should maybe use match instead of magic math
 
         let pinnum = pin % 10;
         mask = mask << pinnum * 3;

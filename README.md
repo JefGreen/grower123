@@ -15,6 +15,7 @@ file target/armv7a-none-eabi/debug/grower123
 ```
 
 <!-- TODO: fix this command because I currently get command not found: arm-none-eabi-objcopy -->
+<!-- /Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/arm-none-eabi/bin/objcopy -->
 ```bash
 arm-none-eabi-objcopy -O binary target/armv7a-none-eabi/debug/grower123 ./grower.img
 ```
