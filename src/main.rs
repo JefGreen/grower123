@@ -102,18 +102,10 @@ pub extern "C" fn _start() -> ! {
     loop {
         GPIO::on(21);
 
-        for _ in 1..50000 {
-            unsafe {
-                asm!("nop");
-            }
-        }
+        sleep();
         GPIO::off(21);
 
-        for _ in 1..50000 {
-            unsafe {
-                asm!("nop");
-            }
-        }
+        sleep();
     }
     // let sunflower = plantable::Microgreen::new();
     // use core::time::Duration;
