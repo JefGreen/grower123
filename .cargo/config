@@ -2,9 +2,6 @@
 target = "armv7a-none-eabi"
 rustc = "rustc"
 
-[target.armv7a-none-eabi]
-runner = ""
-
 [profile.dev]
 panic = "abort"
 
