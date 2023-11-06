@@ -22,7 +22,7 @@ arm-none-eabi-objcopy -O binary target/armv7a-none-eabi/debug/grower123 ./kernel
 
 # View built file using
 ```bash
-objdump -D target/armv7a-none-eabi/debug/grower123 | less
+arm-none-eabi-objdump -D target/armv7a-none-eabi/debug/grower123 | less
 ```
 
 Install target
