@@ -1,7 +1,11 @@
 #![no_main]
 #![no_std]
+use crate::pl011::Uart;
 use core::arch::asm;
 use core::panic::PanicInfo;
+use log::{error, info, LevelFilter};
+use smccc::psci::system_off;
+use smccc::Hvc;
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
 // From official doc: https://docs.rust-embedded.org/embedonomicon/smallest-no-std.html
@@ -22,6 +26,9 @@ const GPIO_FSEL2: u32 = 0x3F20_0008;
 
 const GPIO_SET0: u32 = 0x3f20_001c;
 const GPIO_CLR0: u32 = 0x3f20_0028;
+
+/// Base address of the primary PL011 UART.
+const PL011_BASE_ADDRESS: *mut u32 = 0x900_0000 as _;
 
 impl GPIO {
     pub fn set_ouput(pin: u32) {
@@ -96,6 +103,13 @@ fn sleep() {
 #[link_section = ".text._start"]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    // Safe because `PL011_BASE_ADDRESS` is the base address of a PL011 device,
+    // and nothing else accesses that address range.
+    let uart = unsafe { Uart::new(PL011_BASE_ADDRESS) };
+    logger::init(uart, LevelFilter::Trace).unwrap();
+
+    info!("main({x0:#x}, {x1:#x}, {x2:#x}, {x3:#x})");
+
     GPIO::set_ouput(21);
 
     loop {
@@ -109,6 +123,7 @@ pub extern "C" fn _start() -> ! {
 }
 
 #[panic_handler]
-fn panic(_panic: &PanicInfo<'_>) -> ! {
+fn panic(info: &PanicInfo<'_>) -> ! {
+    error!("{info}");
     loop {}
 }
