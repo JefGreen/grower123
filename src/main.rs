@@ -4,8 +4,10 @@ use crate::pl011::Uart;
 use core::arch::asm;
 use core::panic::PanicInfo;
 use log::{error, info, LevelFilter};
+use rtt_target::{rprintln, rtt_init_print};
 use smccc::psci::system_off;
 use smccc::Hvc;
+
 // Debugging baremetal rust: https://betterprogramming.pub/debugging-embedded-rust-e92ff0b8b8e5
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
@@ -109,10 +111,12 @@ pub extern "C" fn _start() -> ! {
     rtt_init_print!();
 
     // TODO: setup sst print and cleanup uart
-    let uart = unsafe { Uart::new(PL011_BASE_ADDRESS) };
-    logger::init(uart, LevelFilter::Trace).unwrap();
+    // let uart = unsafe { Uart::new(PL011_BASE_ADDRESS) };
+    // logger::init(uart, LevelFilter::Trace).unwrap();
 
-    info!("main({x0:#x}, {x1:#x}, {x2:#x}, {x3:#x})");
+    // info!("main({x0:#x}, {x1:#x}, {x2:#x}, {x3:#x})");
+
+    rprintln!("Hello, world!");
 
     GPIO::set_ouput(21);
 
@@ -128,6 +132,6 @@ pub extern "C" fn _start() -> ! {
 
 #[panic_handler]
 fn panic(info: &PanicInfo<'_>) -> ! {
-    error!("{info}");
+    // error!("{info}");
     loop {}
 }
