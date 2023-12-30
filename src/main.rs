@@ -6,6 +6,7 @@ use core::panic::PanicInfo;
 use log::{error, info, LevelFilter};
 use smccc::psci::system_off;
 use smccc::Hvc;
+// Debugging baremetal rust: https://betterprogramming.pub/debugging-embedded-rust-e92ff0b8b8e5
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
 // Raspberry pi linux kernel: https://github.com/raspberrypi/linux
 // From official doc: https://docs.rust-embedded.org/embedonomicon/smallest-no-std.html
