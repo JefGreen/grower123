@@ -106,6 +106,9 @@ fn sleep() {
 pub extern "C" fn _start() -> ! {
     // Safe because `PL011_BASE_ADDRESS` is the base address of a PL011 device,
     // and nothing else accesses that address range.
+    rtt_init_print!();
+
+    // TODO: setup sst print and cleanup uart
     let uart = unsafe { Uart::new(PL011_BASE_ADDRESS) };
     logger::init(uart, LevelFilter::Trace).unwrap();
 
