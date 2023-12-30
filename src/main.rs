@@ -1,12 +1,12 @@
 #![no_main]
 #![no_std]
-use crate::pl011::Uart;
+// use crate::pl011::Uart;
 use core::arch::asm;
 use core::panic::PanicInfo;
-use log::{error, info, LevelFilter};
+// use log::{error, info, LevelFilter};
 use rtt_target::{rprintln, rtt_init_print};
-use smccc::psci::system_off;
-use smccc::Hvc;
+// use smccc::psci::system_off;
+// use smccc::Hvc;
 
 // Debugging baremetal rust: https://betterprogramming.pub/debugging-embedded-rust-e92ff0b8b8e5
 // Found good documentation for embedded rust https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials/tree/master/00_before_we_start
