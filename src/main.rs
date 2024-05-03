@@ -31,7 +31,7 @@ const GPIO_SET0: u32 = 0x3f20_001c;
 const GPIO_CLR0: u32 = 0x3f20_0028;
 
 /// Base address of the primary PL011 UART.
-const PL011_BASE_ADDRESS: *mut u32 = 0x900_0000 as _;
+// const PL011_BASE_ADDRESS: *mut u32 = 0x900_0000 as _;
 
 impl GPIO {
     pub fn set_ouput(pin: u32) {
@@ -131,7 +131,7 @@ pub extern "C" fn _start() -> ! {
 }
 
 #[panic_handler]
-fn panic(info: &PanicInfo<'_>) -> ! {
+fn panic(_info: &PanicInfo<'_>) -> ! {
     // error!("{info}");
     loop {}
 }
