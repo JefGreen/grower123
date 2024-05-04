@@ -1,5 +1,6 @@
 # grower123
-Is an embeded project written in Rust for a raspberry pi 4 model B
+Is an embeded project written in Rust for a raspberry pi 4 model B.
+
 
 # Get started using
 <!-- TODO: update read me file -->
